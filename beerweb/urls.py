@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path
 
 from beers import views
+from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index')
+    path('brewery/', include('beers.urls'))
 ]
