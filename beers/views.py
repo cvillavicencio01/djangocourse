@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from beers.models import Brewery
-from django.template import loader
 
 def index(request):
     return HttpResponse("hola cerveza")
@@ -9,10 +8,12 @@ def index(request):
 
 def brewery(request):
     all_breweries = Brewery.objects.all()
-    template = loader.get_template('beers/breweries.html')
-    context = {'pikachu': all_breweries}
-    return HttpResponse(template.render(context, request))
+    return render(request,'beers/breweries.html', {'pikachu': all_breweries})
 
 
 def brewery_details(request, brewery_id):
-    return HttpResponse("soy el detalle de la cerveceria con id:" + brewery_id)
+    try:
+        brewery = Brewery.objects.get(id=brewery_id)
+    except Brewery.DoesNotExist:
+        raise Http404("Cerveceria no existe")
+    return render(request,'beers/details.html', {'brewery': brewery})

@@ -1,0 +1,6 @@
+<h2>Cerveceria: {{ brewery }}</h2>
+<ul>
+    {% for beer in brewery.beer_set.all %}
+        <li>{{beer.name}}</li>
+    {% endfor %}
+</ul>
