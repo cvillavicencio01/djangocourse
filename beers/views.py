@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from beers.models import Brewery
 
@@ -12,8 +12,5 @@ def brewery(request):
 
 
 def brewery_details(request, brewery_id):
-    try:
-        brewery = Brewery.objects.get(id=brewery_id)
-    except Brewery.DoesNotExist:
-        raise Http404("Cerveceria no existe")
+    brewery = get_object_or_404(Brewery, pk=brewery_id)
     return render(request,'beers/details.html', {'brewery': brewery})
