@@ -1,7 +1,7 @@
 {% if pikachu %}
 <ul>
     {% for brewery in pikachu %}
-        <li><a href="/brewery/{{brewery.id}}/"> {{ brewery.name }} </a><br></li>
+        <li><a href="{% url 'brewery_details' brewery.id %}"> {{ brewery.name }} </a><br></li>
     {% endfor %}
 </ul>
 {% else %}
