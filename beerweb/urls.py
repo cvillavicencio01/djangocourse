@@ -18,8 +18,10 @@ from django.urls import path
 
 from beers import views
 from django.conf.urls import include
+from . import views
 
 urlpatterns = [
+    path('', views.index),
     path('admin/', admin.site.urls),
     path('brewery/', include('beers.urls'))
 ]
